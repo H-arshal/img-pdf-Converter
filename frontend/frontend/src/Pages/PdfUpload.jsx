@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import toastr from "toastr"; // Import Toastr
 import Loader from "../Components/Loader.jsx"; // Import the Loader component
+import '../Styles/styles.css';
+  
 const springURL = process.env.REACT_APP_API_URL || "http://localhost:8080";
 
 const PdfUpload = () => {

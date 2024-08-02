@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import toastr from "toastr";
 import Loader from "../Components/Loader.jsx";
+import '../Styles/styles.css';
+
 const springURL = process.env.REACT_APP_API_URL || 'http://localhost:8080'
 const ImageUpload = () => {
   const [selectedFiles, setSelectedFiles] = useState([]);
