@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import toastr from "toastr"; // Import Toastr
 import Loader from "../Components/Loader.jsx"; // Import the Loader component
+const springURL = process.env.REACT_APP_API_URL || "http://localhost:8080";
 
 const PdfUpload = () => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -14,21 +15,18 @@ const PdfUpload = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     if (!selectedFile) {
-      toastr.error("Please select at least one PDF.");
+      toastr.error("Please select a PDF file.");
       return;
     }
-
     setIsSubmitting(true);
     setDownloadLink("");
-
     const formData = new FormData();
     formData.append("file", selectedFile);
 
     try {
       const response = await axios.post(
-        "http://localhost:8080/image-pdf/convert-to-img",
+        `${springURL}/image-pdf/convert-to-img`,
         formData,
         {
           responseType: "blob",
@@ -58,11 +56,15 @@ const PdfUpload = () => {
             <button type="submit" disabled={isSubmitting}>
               {isSubmitting ? "Converting PDF..." : "Generate Images"}
             </button>
-            {isSubmitting && <Loader />} {/* Show Loader when submitting */}
+            {isSubmitting && <Loader />}
           </div>
         </form>
         {downloadLink && (
-          <a href={downloadLink} download="images.zip" className="download-link">
+          <a
+            href={downloadLink}
+            download="images.zip"
+            className="download-link"
+          >
             Download Images
           </a>
         )}
