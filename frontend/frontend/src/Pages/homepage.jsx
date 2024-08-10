@@ -7,7 +7,7 @@ import PdfUpload from './PdfUpload';
 import '../Styles/styles.css';
 
 import 'toastr/build/toastr.min.css';
-function Homepage() {
+function  Homepage() {
   return (
     <Router>
       <div className="App">

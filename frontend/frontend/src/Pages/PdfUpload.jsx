@@ -4,20 +4,23 @@ import toastr from "toastr"; // Import Toastr
 import Loader from "../Components/Loader.jsx"; // Import the Loader component
 import '../Styles/styles.css';
   
-const springURL = process.env.REACT_APP_API_URL || "http://localhost:8080";
+const springURL = process.env.REACT_APP_API_URL
 
 const PdfUpload = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [downloadLink, setDownloadLink] = useState("");
-
+  
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
   };
 
   const handleSubmit = async (event) => {
+
     event.preventDefault();
     if (!selectedFile) {
+    console.log(springURL);
+
       toastr.error("Please select a PDF file.");
       return;
     }
@@ -41,6 +44,7 @@ const PdfUpload = () => {
       setDownloadLink(url);
       toastr.success("Images generated successfully!");
     } catch (error) {
+      
       console.error("Error generating images:", error);
       toastr.error("Error generating images. Please try again.");
     } finally {
